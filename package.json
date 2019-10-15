@@ -1,0 +1,27 @@
+{
+  "name": "fieldservicereportapi",
+  "version": "1.0.0",
+  "description": "REST API for Field Service Report",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olszewskik/fieldServiceReportAPI.git"
+  },
+  "author": "Kamil Olszewski (kamil.web@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olszewskik/fieldServiceReportAPI/issues"
+  },
+  "homepage": "https://github.com/olszewskik/fieldServiceReportAPI#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "nodemon": "^1.19.3"
+  }
+}
