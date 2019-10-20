@@ -19,4 +19,19 @@ app.use((req, res, next) => {
 
 app.use('/feed', feedRoutes);
 
-app.listen(8080);
+app.use((error, req, res, next) => {
+  console.log(error);
+  const status = error.statusCode || 500;
+  const message = error.message;
+  res.status(status).json({ message: message });
+});
+
+mongoose
+  .connect(
+    'mongodb+srv://kamil:<PASSWORD>@cluster0-2jtwp.mongodb.net/FieldServiceReport?retryWrites=true&w=majority',
+  )
+  .then(result => {
+    app.listen(8080);
+    console.log('Connect to database');
+  })
+  .catch(err => console.log(err));

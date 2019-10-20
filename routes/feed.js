@@ -4,10 +4,10 @@ const feedController = require('../controllers/feed');
 
 const router = express.Router();
 
-router.get('/posts', feedController.getPosts);
+router.get('/reports', feedController.getReports);
 
 router.post(
-  '/post',
+  '/report',
   [
     body('name')
       .trim()
@@ -17,7 +17,9 @@ router.post(
       .trim()
       .isNumeric(),
   ],
-  feedController.createPost,
+  feedController.createReport,
 );
+
+router.get('/report/:reportId', feedController.getReport);
 
 module.exports = router;
