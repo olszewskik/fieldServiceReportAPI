@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const reportSchema = new Schema(
   {
+    _id: { type: mongoose.Types.ObjectId, require: true },
     name: { type: String, require: true },
     date: { type: Date, require: true },
     placement: { type: Number, require: false },
@@ -14,4 +16,4 @@ const reportSchema = new Schema(
   { timestamp: true },
 );
 
-module.exports = mongoose.model('Report', reportSchema);
+module.exports.ReportModel = mongoose.model('Report', reportSchema);

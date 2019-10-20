@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator/check');
-const Report = require('../models/report');
+const Report = require('../models/report').ReportModel;
+const mongoose = require('mongoose');
 
 exports.getReports = (req, res, next) => {
   Report.find()
@@ -23,20 +24,15 @@ exports.createReport = (req, res, next) => {
     error.statusCode(422);
     throw error;
   }
-  const name = req.body.name;
-  const placement = req.body.placement;
-  const video = req.body.video;
-  const hours = req.body.hours;
-  const returnVisits = req.body.returnVisits;
-  const studies = req.body.studies;
   const report = new Report({
-    name: name,
+    _id: new mongoose.Types.ObjectId(),
+    name: req.body.name,
     date: new Date().toISOString(),
-    placement: placement,
-    video: video,
-    hours: hours,
-    returnVisits: returnVisits,
-    studies: studies,
+    placement: req.body.placement,
+    video: req.body.video,
+    hours: req.body.hours,
+    returnVisits: req.body.returnVisits,
+    studies: req.body.studies,
   });
   report
     .save()
