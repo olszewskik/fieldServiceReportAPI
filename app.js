@@ -26,10 +26,14 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message });
 });
 
+const config = require('./bin/config');
+
 mongoose
-  .connect('mongodb+srv://kamil:password@cluster0-2jtwp.mongodb.net/FieldServiceReport?retryWrites=true&w=majority')
+  .connect(
+    `mongodb+srv://${config.database.user}:${config.database.password}@cluster0-2jtwp.mongodb.net/FieldServiceReport?retryWrites=true&w=majority`,
+  )
   .then(() => {
-    app.listen(8080);
-    console.log('Connect to database');
+    app.listen(config.server.port);
+    console.log(`Connect to database on port ${config.server.port}`);
   })
   .catch(err => console.log(err));
