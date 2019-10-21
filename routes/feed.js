@@ -17,9 +17,11 @@ router.post(
       .trim()
       .isNumeric(),
   ],
-  feedController.createReport,
+  feedController.postReport,
 );
 
 router.get('/report/:reportId', feedController.getReport);
+router.put('/report/:reportId', feedController.putReport);
+router.delete('/report/:reportId', feedController.deleteReport);
 
 module.exports = router;

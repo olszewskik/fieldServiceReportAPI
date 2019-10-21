@@ -5,9 +5,7 @@ const mongoose = require('mongoose');
 exports.getReports = (req, res, next) => {
   Report.find()
     .then(reports => {
-      res
-        .status(200)
-        .json({ message: 'Fetched reports successfully', reports: reports });
+      res.status(200).json({ message: 'Fetched reports successfully', reports: reports });
     })
     .catch(err => {
       if (!err.statusCode) {
@@ -17,7 +15,7 @@ exports.getReports = (req, res, next) => {
     });
 };
 
-exports.createReport = (req, res, next) => {
+exports.postReport = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error('Validation failed, entered data is incorrect');
@@ -61,6 +59,56 @@ exports.getReport = (req, res, next) => {
         throw error;
       }
       res.status(200).json({ message: 'Report fetched', report: report });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.putReport = (req, res, next) => {
+  const reportId = req.params.reportId;
+  Report.findById(reportId)
+    .then(report => {
+      if (!reportId) {
+        const error = new Error('Could not find report!');
+        error.statusCode(404);
+        throw error;
+      }
+      report.placement = req.body.placement;
+      report.video = req.body.video;
+      report.hours = req.body.hours;
+      report.returnVisits = req.body.returnVisits;
+      report.studies = req.body.studies;
+      return report.save();
+    })
+    .then(result => {
+      res.status(200).json({ message: 'Report updated', report: result });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.deleteReport = (req, res, next) => {
+  const reportId = req.params.reportId;
+  Report.findById(reportId)
+    .then(report => {
+      if (!reportId) {
+        const error = new Error('Could not find report!');
+        error.statusCode(404);
+        throw error;
+      }
+      return Report.findByIdAndRemove(reportId);
+    })
+    .then(result => {
+      console.log(result);
+      res.status(200).json({ message: 'Report deleted' });
     })
     .catch(err => {
       if (!err.statusCode) {
