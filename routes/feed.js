@@ -6,9 +6,7 @@ const router = express.Router();
 
 router.get('/reports', feedController.getReports);
 
-router.post(
-  '/report',
-  [
+router.post('/report', [
     body('name')
       .trim()
       .isString()
@@ -16,9 +14,7 @@ router.post(
     body('video')
       .trim()
       .isNumeric(),
-  ],
-  feedController.postReport,
-);
+  ], feedController.postReport,);
 
 router.get('/report/:reportId', feedController.getReport);
 router.put('/report/:reportId', feedController.putReport);
