@@ -24,6 +24,7 @@ exports.postReport = (req, res, next) => {
   }
   const report = new Report({
     _id: new mongoose.Types.ObjectId(),
+    userId: req.body.userId,
     name: req.body.name,
     date: new Date().toISOString(),
     placement: req.body.placement,
@@ -31,6 +32,8 @@ exports.postReport = (req, res, next) => {
     hours: req.body.hours,
     returnVisits: req.body.returnVisits,
     studies: req.body.studies,
+    addHours: req.body.addHours,
+    comment: req.body.comment,
   });
   report
     .save()
@@ -82,6 +85,8 @@ exports.putReport = (req, res, next) => {
       report.hours = req.body.hours;
       report.returnVisits = req.body.returnVisits;
       report.studies = req.body.studies;
+      report.addHours = req.body.addHours;
+      report.comment = req.body.comment;
       return report.save();
     })
     .then(result => {
