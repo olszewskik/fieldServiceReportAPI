@@ -1,8 +1,8 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const feedRoutes = require('./routes/feed');
-const authRoutes = require('./routes/auth');
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import feedRoutes from './routes/feed';
+import authRoutes from './routes/auth';
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message });
 });
 
-const config = require('./bin/config');
+const config = require('./config/config');
 
 mongoose
   .connect(

@@ -2,10 +2,12 @@
   "name": "fieldservicereportapi",
   "version": "1.0.0",
   "description": "REST API for Field Service Report",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.js"
+    "build": "rimraf ./dist && babel ./src -d ./dist",
+    "prestart": "npm run -s build",
+    "start": "node dist/app.js",
+    "dev": "nodemon -w src --exec babel-node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -26,10 +28,15 @@
     "mongoose": "^5.7.5"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.4",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0"
   }
 }
