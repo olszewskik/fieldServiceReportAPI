@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import apiRoutes from './routes';
 import feedRoutes from './routes/feed';
 import authRoutes from './routes/auth';
 import morgan from 'morgan';
@@ -38,8 +39,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/feed', feedRoutes);
-app.use('/api/auth', authRoutes());
+apiRoutes(app);
 
 app.use(catchErrors);
 

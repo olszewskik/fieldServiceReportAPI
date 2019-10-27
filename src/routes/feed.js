@@ -1,23 +1,15 @@
-const express = require('express');
-const { body } = require('express-validator');
-const feedController = require('../controllers/feed');
+import { Router } from 'express';
+import feedController from '../controllers/feed';
+import { catchAsync } from '../middleware/errors';
 
-const router = express.Router();
+export default () => {
+  const api = Router();
 
-router.get('/reports', feedController.getReports);
+  api.get('/reports', feedController.getReports);
+  api.post('/report', feedController.postReport);
+  api.get('/report/:reportId', feedController.getReport);
+  api.put('/report/:reportId', feedController.putReport);
+  api.delete('/report/:reportId', feedController.deleteReport);
 
-router.post('/report', [
-    body('name')
-      .trim()
-      .isString()
-      .isLength({ min: 5 }),
-    body('video')
-      .trim()
-      .isNumeric(),
-  ], feedController.postReport,);
-
-router.get('/report/:reportId', feedController.getReport);
-router.put('/report/:reportId', feedController.putReport);
-router.delete('/report/:reportId', feedController.deleteReport);
-
-module.exports = router;
+  return api;
+};

@@ -1,5 +1,5 @@
-const { validationResult } = require('express-validator');
-const Report = require('../models/report').ReportModel;
+
+const Report = require('../models/report');
 const mongoose = require('mongoose');
 
 exports.getReports = (req, res, next) => {
@@ -16,12 +16,6 @@ exports.getReports = (req, res, next) => {
 };
 
 exports.postReport = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const error = new Error('Validation failed, entered data is incorrect');
-    error.statusCode(422);
-    throw error;
-  }
   const report = new Report({
     _id: new mongoose.Types.ObjectId(),
     userId: req.body.userId,

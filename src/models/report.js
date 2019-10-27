@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const User = require('./user').UserModel;
+const User = require('./user');
 const Schema = mongoose.Schema;
 
 const reportSchema = new Schema(
   {
-    _id: { type: mongoose.Types.ObjectId, require: true },
     name: { type: String, require: true },
     date: { type: Date, require: true },
     placement: { type: Number, require: false },
@@ -15,7 +14,9 @@ const reportSchema = new Schema(
     addHours: { type: Number, require: false },
     comment: { type: String, require: false },
   },
-  { timestamp: true },
+  {
+    timestamps: true,
+  },
 );
 
-module.exports.ReportModel = mongoose.model('Report', reportSchema);
+module.exports = mongoose.model('Report', reportSchema);
