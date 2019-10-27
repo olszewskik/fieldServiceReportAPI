@@ -1,9 +1,13 @@
-const express = require('express');
-const authController = require('../controllers/auth');
+import { Router } from 'express';
+import passport from 'passport';
+import authController from '../controllers/auth';
+import { catchAsync } from '../middleware/errors';
 
-const router = express.Router();
+export default () => {
+  const api = Router();
 
-router.post('/register', authController.registerUser);
-router.post('/login', authController.login);
+  api.post('/login', passport.authenticate('local', { session: false }), authController.login);
+  api.post('/register', authController.register);
 
-module.exports = router;
+  return api;
+};

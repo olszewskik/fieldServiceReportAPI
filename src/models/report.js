@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const reportSchema = new Schema(
   {
     _id: { type: mongoose.Types.ObjectId, require: true },
-    userId: { type: mongoose.ObjectId, ref: User },
     name: { type: String, require: true },
     date: { type: Date, require: true },
     placement: { type: Number, require: false },
