@@ -15,7 +15,7 @@ exports.getReports = (req, res, next) => {
     });
 };
 
-exports.postReport = (req, res, next) => {
+ćexports.postReport = (req, res, next) => {
   const report = new Report({
     _id: new mongoose.Types.ObjectId(),
     userId: req.body.userId,

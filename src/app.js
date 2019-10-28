@@ -1,10 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
 import express from 'express';
 import bodyParser from 'body-parser';
 import apiRoutes from './routes';
-import feedRoutes from './routes/feed';
-import authRoutes from './routes/auth';
 import morgan from 'morgan';
-import { catchErrors } from './middleware/errors';
+import { notFound, catchErrors } from './middleware/errors';
 import passport from './config/passport';
 
 // Connect to database
@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 
 apiRoutes(app);
 
+app.use(notFound);
 app.use(catchErrors);
 
 app.listen(process.env.PORT, () => {

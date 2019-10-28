@@ -9,16 +9,10 @@ export default {
   },
 
   async register(req, res, next) {
-    try {
-      const {
-        firstName, lastName, email, password,
-      } = req.body;
-      const user = new User({ firstName, lastName, email });
-      await User.register(user, password);
+    const { firstName, lastName, email, password } = req.body;
+    const user = new User({ firstName, lastName, email });
+    await User.register(user, password);
 
-      return res.status(201).json({ message: 'User created!', userId: user._id });
-    } catch (e) {
-      return res.status(500).json(e);
-    }
+    return res.status(201).json({ message: 'User created!', userId: user._id });
   },
 };

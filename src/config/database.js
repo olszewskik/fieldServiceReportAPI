@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+
 export default {
-  mongoUrl:
-    'mongodb+srv://login:password@cluster0-2jtwp.mongodb.net/FieldServiceReport?retryWrites=true&w=majority',
+  mongoUrl: process.env.MONGO_URL,
   settings: {
     useNewUrlParser: true,
     useUnifiedTopology: true,
