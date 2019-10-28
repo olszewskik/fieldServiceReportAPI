@@ -1,4 +1,3 @@
-
 const Report = require('../models/report');
 const mongoose = require('mongoose');
 
@@ -15,7 +14,7 @@ exports.getReports = (req, res, next) => {
     });
 };
 
-ćexports.postReport = (req, res, next) => {
+exports.postReport = (req, res, next) => {
   const report = new Report({
     _id: new mongoose.Types.ObjectId(),
     userId: req.body.userId,
@@ -46,6 +45,15 @@ exports.getReports = (req, res, next) => {
     });
 };
 
+export default {
+  async getReport(req, res, next) {
+    const report = await Report.findById(req.params.reportId);
+    if (!report) return next();
+    res.status(200).json({ message: 'Report fetched', report: report });
+  },
+};
+
+/*
 exports.getReport = (req, res, next) => {
   const reportId = req.params.reportId;
   Report.findById(reportId)
@@ -64,6 +72,7 @@ exports.getReport = (req, res, next) => {
       next(err);
     });
 };
+*/
 
 exports.putReport = (req, res, next) => {
   const reportId = req.params.reportId;
