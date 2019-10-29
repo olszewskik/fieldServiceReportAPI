@@ -11,5 +11,5 @@ export function catchAsync(fn) {
 }
 
 export function catchErrors(err, req, res, next) {
-  res.status(err.status || 500).json({err});
+  res.status(err.status || 500).json({ err });
 }

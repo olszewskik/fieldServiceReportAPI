@@ -13,7 +13,7 @@ import mongoose from 'mongoose';
 
 passport();
 
-mongoose.connect(dbConfig.mongoUrl, dbConfig.settings).then(() => {
+mongoose.connect(process.env.MONGO_URL, dbConfig.settings).then(() => {
   console.log('Connected to database');
 });
 mongoose.Promise = global.Promise;
