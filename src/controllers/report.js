@@ -50,7 +50,7 @@ export default {
 
   async postReport(req, res, next) {
     const report = await new Report({
-      name: req.body.name,
+      userId: req.user._id,
       date: req.body.date,
       placement: req.body.placement,
       video: req.body.video,
@@ -58,8 +58,9 @@ export default {
       returnVisits: req.body.returnVisits,
       studies: req.body.studies,
       addHours: req.body.addHours,
-      comment: req.body.comment
-    }).save();
+      comment: req.body.comment,
+    }
+    ).save();
     return res.status(201).json({
       message: 'Post created successfully!',
       report: report,

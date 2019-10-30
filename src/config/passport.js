@@ -14,7 +14,7 @@ function verifyCallback(payload, done) {
 export default () => {
   const config = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'test',
+    secretOrKey: process.env.JWT_SECRET,
   };
 
   passport.use(User.createStrategy());
