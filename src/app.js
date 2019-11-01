@@ -41,8 +41,8 @@ app.use((req, res, next) => {
 
 apiRoutes(app);
 
-app.use(notFound);
-app.use(catchErrors);
+//app.use(notFound);
+//app.use(catchErrors);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port: ${process.env.PORT} - Running on ${process.env.NODE_ENV}`);
