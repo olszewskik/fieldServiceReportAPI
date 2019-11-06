@@ -6,7 +6,7 @@ import jwAuth from '../middleware/auth';
 export default () => {
   const api = Router();
 
-  api.get('/reports', jwAuth, reportController.getReports);
+  api.get('/reports', catchAsync(reportController.getReports));
   api.get('/reports/:reportId', jwAuth, catchAsync(reportController.getReport));
   api.post('/reports', jwAuth, catchAsync(reportController.createReport));
   api.put('/reports/:reportId', jwAuth, catchAsync(reportController.updateReport));

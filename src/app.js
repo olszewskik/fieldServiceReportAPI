@@ -32,6 +32,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
@@ -39,10 +40,11 @@ app.use((req, res, next) => {
   next();
 });
 
+
 apiRoutes(app);
 
-//app.use(notFound);
-//app.use(catchErrors);
+app.use(notFound);
+app.use(catchErrors);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port: ${process.env.PORT} - Running on ${process.env.NODE_ENV}`);

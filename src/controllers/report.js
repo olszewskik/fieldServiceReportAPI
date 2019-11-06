@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 export default {
   async getReport(req, res, next) {
     const report = await Report.findById(req.params.reportId);
-    if (!report) return next();
+    if (!report) next();
     return res.status(200).json({ message: 'Report fetched', report });
   },
 
@@ -57,28 +57,3 @@ export default {
     return res.status(200).json({ message: 'Report deleted', report });
   },
 };
-
-/*
-exports.deleteReport = (req, res, next) => {
-  const reportId = req.params.reportId;
-  Report.findById(reportId)
-    .then(report => {
-      if (!reportId) {
-        const error = new Error('Could not find report!');
-        error.statusCode(404);
-        throw error;
-      }
-      return Report.findByIdAndRemove(reportId);
-    })
-    .then(result => {
-      console.log(result);
-      res.status(200).json({ message: 'Report deleted' });
-    })
-    .catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
-};
-*/
